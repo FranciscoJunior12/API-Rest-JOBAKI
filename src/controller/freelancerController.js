@@ -46,7 +46,7 @@ exports.post = (req, res, next) => {
         .catch(e => {
             res.status(400).send({
                 mensagem: "erro ao cadastrar freelancer",
-                data: e
+                erro: e
             });
         });
 
@@ -67,7 +67,7 @@ exports.put = (req, res, next) => {
             habilidades: req.body.habilidades,
             avatar: req.body.avatar,
             portifolio: req.body.portifolio,
-            status:req.body.status
+            status: req.body.status
 
         }
     })
