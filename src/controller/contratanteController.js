@@ -4,19 +4,20 @@ const contra = require('../models/contratante');
 const Contratante = mongoose.model('Cliente');
 
 
-exports.get = (req, res) => {
-    Contratante.find({ status: true }
-        )
-        .then(data => {
+exports.get = async (req, res) => {
+    try {
+        const data = await Contratante
+            .find({ status: true });
+        res.status(200).send(data);
 
-            res.status(200).send(data);
-        })
-        .catch(erro => {
-            res.status(400).send(erro);
-        });
+    } catch (error) {
+        res.status(400).send(erro);
+
+    }
+
+
 
 }
-
 
 
 
@@ -41,3 +42,5 @@ exports.post = (req, res, next) => {
 
 
 }
+
+

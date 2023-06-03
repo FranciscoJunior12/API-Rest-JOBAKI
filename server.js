@@ -7,6 +7,7 @@ const cors = require('cors');
 //carragar rotas
 const freelancerRoute = require('./src/router/freelancerRoute');
 const contratanteRoute = require('./src/router/contratanteRoute');
+const userRoute = require('./src/router/userRoute');
 
 
 // carregar models
@@ -28,6 +29,7 @@ mongoose.connect('mongodb+srv://FranciscoJunior:Tentadenovo12345@cursonodejs.53u
 
 app.use('/freelancers', freelancerRoute);
 app.use('/contratantes', contratanteRoute);
+app.use('/users', userRoute);
 
 app.get("/", (req, res) => {
     res.send('Isso é um teste');

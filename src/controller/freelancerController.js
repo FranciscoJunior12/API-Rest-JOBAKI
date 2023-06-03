@@ -44,7 +44,7 @@ exports.post = (req, res, next) => {
 
         })
         .catch(e => {
-            res.status(400).send({
+                    res.status(400).send({
                 mensagem: "erro ao cadastrar freelancer",
                 erro: e
             });
@@ -108,6 +108,58 @@ exports.delete = (req, res, next) => {
                 erro: e
             });
         });
+
+
+}
+
+
+
+
+exports.login = async (req, res) => {
+
+    const { email, password } = req.body
+
+    console.log(email, password);
+    try {
+
+        if (!email || !password) {
+
+            return res.status(400).send({
+                mensagem: 'Por favor, preencha todos os campos.'
+            });
+        }
+
+ 
+        const freelancer = Freelancer
+            .find({
+                email: email,
+                status: true,
+                senha: password
+            });
+
+
+
+        if (!freelancer) {
+            res.status(400).send({
+                msg: 'Email ou senha inválidos'
+            });
+            return;
+        }
+
+        console.log(scret)
+        const token = jwt.sign({ email }, scret, { expiresIn: '10d' })
+        res.status(200).send({ token, user });
+
+
+    } catch (error) {
+
+        res.status(500).send({
+
+            msg: 'Erro interno, por favor tente novamente.',
+            error: error
+        });
+    }
+
 
 
 }
