@@ -4,10 +4,10 @@ const proposta = require('../models/proposta');
 const Proposta = mongoose.model('Proposta');
 
 exports.get = (req, res) => {
-    Proposta.find({ status: true })
+    Proposta.find()
 
         .then(data => {
-            res.status(200).send(data);
+            res.status(200).send(data); 
         })
         .catch(erro => {
             res.status(400).send({
@@ -16,7 +16,12 @@ exports.get = (req, res) => {
             });
 
         })
-    }
+}
+
+
+
+
+
 
 
 exports.post = (req, res, next) => {
@@ -37,7 +42,7 @@ exports.post = (req, res, next) => {
             });
         });
 
- 
+
 }
 
 exports.put = (req, res, next) => {
@@ -58,3 +63,4 @@ exports.put = (req, res, next) => {
 
 
 }
+

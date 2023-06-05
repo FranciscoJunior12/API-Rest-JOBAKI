@@ -31,6 +31,22 @@ exports.getEmpresa = (req, res) => {
 
 
 
+exports.getById = (req, res) => {
+    User.findOne({ status: true, _id: req.params.id })
+
+        .then(data => {
+            res.status(200).send(data);
+        })
+        .catch(erro => {
+            res.status(400).send({
+                mensagem: "erro ao pegar pegar user",
+                error: erro
+            });
+
+        })
+}
+
+
 exports.getByHabilidades = async (req, res) => {
     try {
         const data = await User.find({ habilidades: req.params.habilidades });

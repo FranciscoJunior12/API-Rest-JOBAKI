@@ -9,18 +9,30 @@ const schema = new Schema({
         ref: 'User',
         required: true
     },
-    
+
     projectoID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Projecto',
         required: true
     },
+    empresaID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 
+    estado_de_aceitacao: {
+        type: String,
+        trim: true,
+        enum: ['P', 'A', 'R'],
+        default: 'P'
+    },
     status: {
         type: Boolean,
         required: true,
         default: true
     }
+
 
 
 }, { strict: false });

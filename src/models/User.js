@@ -7,7 +7,6 @@ const schema = new Schema({
 
     perfil: {
         type: String,
-      
         trim: true,
         enum: ['Freelancer', 'Empresa']
     },
