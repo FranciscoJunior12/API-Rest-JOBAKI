@@ -22,7 +22,12 @@ const schema = new Schema({
         required: true,
         unique: true
 
-    }
+    },
+    
+    confirmed: {
+        type: Boolean,
+        default: false,
+      },
 
 
 }, { strict: false });

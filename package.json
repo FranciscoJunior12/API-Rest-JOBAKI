@@ -9,11 +9,13 @@
   "author": "francisco Junior",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.1.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "md5": "^2.3.0",
     "mongoose": "^7.1.0",
     "sequelize": "^6.31.0"
   },

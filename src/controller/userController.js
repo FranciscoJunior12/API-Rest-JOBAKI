@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const user = require('../models/User');
 const User = mongoose.model('User');
 
+const emailService = require('../services/email');
+
+const md5 = require('md5')
+
 const jwt = require('jsonwebtoken')
 const scret = process.env.SECRET;
 
@@ -17,6 +21,7 @@ exports.getFreelancer = (req, res) => {
         });
 
 }
+
 exports.getEmpresa = (req, res) => {
     User.find({ status: true, perfil: "Empresa" })
 
@@ -78,6 +83,8 @@ exports.getBylocalizacao = async (req, res) => {
 exports.post = (req, res, next) => {
 
     let newUser = new User(req.body);
+
+    newUser.senha = md5(req.body.senha);
     newUser.save()
         .then(x => {
 
@@ -99,8 +106,10 @@ exports.post = (req, res, next) => {
 
 exports.login = async (req, res) => {
 
-    const { email, senha } = req.body
+    let { email, senha } = req.body; 
 
+    senha = md5(req.body.senha);
+    console.log(senha)
     try {
 
         if (!email || !senha) {
@@ -124,6 +133,16 @@ exports.login = async (req, res) => {
         } else {
 
             const token = jwt.sign({ email }, scret, { expiresIn: '10d' })
+
+            emailService.send(
+                email,
+                'Verificação De Conta',
+                global.EMAIL_TMPL.replace('{0}', "http://localhost:5501/index.html"));
+    
+            // res.status(201).send({
+            //     mensagem: "Cliente cadastrado com sucesso"
+            // });
+
             res.status(200).send({ token, userlogin });
 
 
